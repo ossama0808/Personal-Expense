@@ -13,7 +13,8 @@ class LogInPage extends StatefulWidget {
 enum FormMode { LOGIN, SIGNUP }
 
 class _LogInPageState extends State<LogInPage> {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();// Global Key to Control Screen from any stated object
+  // variables Section
   DateTime logInDate = DateTime.now();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
@@ -28,31 +29,31 @@ class _LogInPageState extends State<LogInPage> {
 
 
   @override
-  Widget build(BuildContext context) {
-    final logo = Hero(
+  Widget build(BuildContext context) {// Main Widget
+    final logo = Hero(// Logo variable
       tag: 'LOGO',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 100.0,
-        child: Image.asset('images/Logo.png'),
+        radius: 100.0,// Logo Size
+        child: Image.asset('images/Logo.png'),// Logo Path
       ),
     );
-    return Scaffold(
-      key:_scaffoldKey,
+    return Scaffold(// Scaffold Widget
+      key:_scaffoldKey,// Stated Key
       backgroundColor: Color(0xFFb728d8),
       body: ListView(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        padding: EdgeInsets.only(left: 24.0, right: 24.0),
+        physics: NeverScrollableScrollPhysics(),// Non-Scrollable Screen
+        shrinkWrap: true,// Divide Widget by its main size
+        padding: EdgeInsets.only(left: 24.0, right: 24.0),// Padding the edge of screen
         children: <Widget>[
-          Padding(
+          Padding(// Logo Padding
             padding: const EdgeInsets.only(top: 85),
             child: logo,
           ),
-          SizedBox(
+          SizedBox(// Extra Space
             height: 20,
           ),
-          Center(
+          Center(// Login text
             child: Text(
               'LOGIN',
               style: TextStyle(
@@ -64,24 +65,23 @@ class _LogInPageState extends State<LogInPage> {
               ),
             ),
           ),
-          //SizedBox(height: 35.0),
-          Padding(
+          Padding(// Email Text Field Padding
             padding: const EdgeInsets.only(top: 85),
             child: TextFormField(
-              controller: emailController,
+              controller: emailController,// Variable that hold typed value
               style: TextStyle(
-                color: Colors.white, // colorPallet('vTextFormFieldTextStyleForgroundColor'),
+                color: Colors.white, // Field Color
                 fontSize: 16,
                 height: 1,
               ),
               decoration: InputDecoration(
                 hintText: 'Email',
                 contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                //border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(32.0),
-                    borderSide: BorderSide(color: Colors.white,
-                        width: 2.0, style: BorderStyle.solid
+                    borderSide: BorderSide(color: Colors.white,// Border Color
+                        width: 2.0, // Border Width
+                        style: BorderStyle.solid// Border Style
                     )
                 ),
                 focusedBorder: OutlineInputBorder(
@@ -91,22 +91,22 @@ class _LogInPageState extends State<LogInPage> {
                         style: BorderStyle.solid
                     )
                 ),
-                labelText: 'Email',
+                labelText: 'Email',// Field Label
                 labelStyle: TextStyle(color: Colors.white),
                 focusColor: Colors.white,
                 hoverColor: Colors.white,
                 isDense: true,
                 counterStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              onChanged: (emailValue) {
-                setState(() {
-                  email = emailValue;
+              onChanged: (emailValue) {// Onchange Function Start hold typed value in 'emailValue'
+                setState(() {// Setting typed value to a local variable
+                  email = emailValue;// Assigning value
                 });
               },
             ),
           ),
-          SizedBox(height: 10.0),
-          TextFormField(
+          SizedBox(height: 10.0),// Add Extra Size
+          TextFormField(// Password Field
             style: TextStyle(
               color: Colors.white,
               fontSize: 16,
@@ -136,12 +136,12 @@ class _LogInPageState extends State<LogInPage> {
           SizedBox(
             height: 10,
           ),
-          RaisedButton(
+          RaisedButton(// Login Button widget
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24),
             ),
-            onPressed: () async {
-              FocusScope.of(context).unfocus();
+            onPressed: () async {// On Pressed Function
+              FocusScope.of(context).unfocus();// Hide Keyboard 
               //signIn();
             },
             padding: EdgeInsets.all(12),
