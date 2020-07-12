@@ -40,7 +40,7 @@ class _LogInPageState extends State<LogInPage> {
     );
     return Scaffold(// Scaffold Widget
       key:_scaffoldKey,// Stated Key
-      backgroundColor: Color(0xFFb728d8),
+      backgroundColor: Color(0xFF40084d),
       body: ListView(
         physics: NeverScrollableScrollPhysics(),// Non-Scrollable Screen
         shrinkWrap: true,// Divide Widget by its main size
@@ -57,7 +57,7 @@ class _LogInPageState extends State<LogInPage> {
             child: Text(
               'LOGIN',
               style: TextStyle(
-                fontFamily: "Schyler-Regular",
+                fontFamily: "Schyler",
                 color: Colors.white,
                 fontSize: 22,
                 fontStyle: FontStyle.normal,
@@ -141,7 +141,7 @@ class _LogInPageState extends State<LogInPage> {
               borderRadius: BorderRadius.circular(24),
             ),
             onPressed: () async {// On Pressed Function
-              FocusScope.of(context).unfocus();// Hide Keyboard 
+              FocusScope.of(context).unfocus();// Hide Keyboard
               //signIn();
             },
             padding: EdgeInsets.all(12),
