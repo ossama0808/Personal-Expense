@@ -13,23 +13,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: new SplashScreen(
-        seconds: 6,
+        seconds: 8,
         navigateAfterSeconds: LogInPage(),
-        title: new Text('Personal Expenses',
+        title: new Text('',
             style: new TextStyle(
-                fontSize: 25.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.white
             )),
-        //image: Image.asset('images/ic_launcher.png'),
+        image: Image.asset('images/Logo.png'),
         styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 80.0,
+        photoSize: 100.0,
         loaderColor:  Colors.white,
         gradientBackground: new LinearGradient(
             colors: [

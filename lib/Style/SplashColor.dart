@@ -10,7 +10,7 @@ class Colors {
 
   static  var primaryGradient =  LinearGradient(
     colors:  [loginGradientStart, loginGradientEnd],
-    stops:  [0.0, 1.0],
+    stops:  [0.0, 8.0],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );

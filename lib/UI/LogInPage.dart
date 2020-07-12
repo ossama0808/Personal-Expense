@@ -33,45 +33,41 @@ class _LogInPageState extends State<LogInPage> {
       tag: 'LOGO',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 55.0,
-        child: Image.asset('images/ic_launcher.png'),
+        radius: 100.0,
+        child: Image.asset('images/Logo.png'),
       ),
     );
     return Scaffold(
       key:_scaffoldKey,
-      backgroundColor: Color(0xFF6a197d),
-      body: Center(
-        child: ListView(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            logo,
-            SizedBox(
-              height: 5,
-            ),
-//            Center(
-//              child: Text(
-//                'Personal Expenses',
-//                style: TextStyle(
-//                  fontFamily: "Trajan Pro",
-//                  color: Colors.white,
-//                  fontSize: 22,
-//                ),
-//              ),
-//            ),
-            Text(
-              'LogIn',
+      backgroundColor: Color(0xFFb728d8),
+      body: ListView(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        padding: EdgeInsets.only(left: 24.0, right: 24.0),
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 85),
+            child: logo,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Text(
+              'LOGIN',
               style: TextStyle(
-                fontFamily: "Trajan Pro",
+                fontFamily: "Schyler-Regular",
                 color: Colors.white,
                 fontSize: 22,
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.w600
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w500
               ),
             ),
-            SizedBox(height: 35.0),
-            TextFormField(
+          ),
+          //SizedBox(height: 35.0),
+          Padding(
+            padding: const EdgeInsets.only(top: 85),
+            child: TextFormField(
               controller: emailController,
               style: TextStyle(
                 color: Colors.white, // colorPallet('vTextFormFieldTextStyleForgroundColor'),
@@ -108,65 +104,65 @@ class _LogInPageState extends State<LogInPage> {
                 });
               },
             ),
-            SizedBox(height: 10.0),
-            TextFormField(
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                height: 1,
-              ),
-              //textAlign: vTextAlignment,
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                //border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0),
-                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0), borderSide: BorderSide(color: Colors.white, width: 2.0, style: BorderStyle.solid)),
-                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0), borderSide: BorderSide(color: Colors.white, width: 2.0, style: BorderStyle.solid)),
-                labelText: 'Password',
-                labelStyle: TextStyle(color: Colors.white),
-                focusColor: Colors.white,
-                hoverColor: Colors.white,
-                isDense: true,
-                counterStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              onChanged: (passwordValue) {
-                setState(() {
-                  password = passwordValue;
-                });
-              },
+          ),
+          SizedBox(height: 10.0),
+          TextFormField(
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              height: 1,
             ),
-            SizedBox(
-              height: 10,
+            //textAlign: vTextAlignment,
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: 'Password',
+              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              //border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0),
+              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0), borderSide: BorderSide(color: Colors.white, width: 2.0, style: BorderStyle.solid)),
+              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0), borderSide: BorderSide(color: Colors.white, width: 2.0, style: BorderStyle.solid)),
+              labelText: 'Password',
+              labelStyle: TextStyle(color: Colors.white),
+              focusColor: Colors.white,
+              hoverColor: Colors.white,
+              isDense: true,
+              counterStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
-            RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
-              onPressed: () async {
-                FocusScope.of(context).unfocus();
-                //signIn();
-              },
-              padding: EdgeInsets.all(12),
-              color: Colors.white.withOpacity(0.8),
-              child: Text('Login', style: TextStyle(color: Colors.black)),
+            onChanged: (passwordValue) {
+              setState(() {
+                password = passwordValue;
+              });
+            },
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          RaisedButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
             ),
-            FlatButton(
-              child: Text(
-                'Forget Your Password?',
-                style: TextStyle(color: Colors.white70),
-              ),
-              onPressed: () {},
+            onPressed: () async {
+              FocusScope.of(context).unfocus();
+              //signIn();
+            },
+            padding: EdgeInsets.all(12),
+            color: Colors.white.withOpacity(0.8),
+            child: Text('Login', style: TextStyle(color: Colors.black)),
+          ),
+          FlatButton(
+            child: Text(
+              'Forget Your Password?',
+              style: TextStyle(color: Colors.white70),
             ),
-            FlatButton(
-              child: Text(
-                'Don\'t Have an Account?',
-                style: TextStyle(color: Colors.white70),
-              ),
-              onPressed: () {},
+            onPressed: () {},
+          ),
+          FlatButton(
+            child: Text(
+              'Don\'t Have an Account?',
+              style: TextStyle(color: Colors.white70),
             ),
-          ],
-        ),
+            onPressed: () {},
+          ),
+        ],
       ),
     );
   }
