@@ -18,28 +18,29 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: new SplashScreen(
-        seconds: 8,
-        navigateAfterSeconds: LogInPage(),
-        title: new Text('',
+      home: new SplashScreen(// Implementation of Splash Screen As Object.
+        seconds: 8,// Seconds Of Loading
+        navigateAfterSeconds: LogInPage(),// After Loading Navigation
+        title: new Text('',// Non Text just for space
             style: new TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.white
             )),
-        image: Image.asset('images/Logo.png'),
+        image: Image.asset('images/Logo.png'),// Logo Path
         styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 100.0,
+        photoSize: 100.0,// Logo Size in pix
         loaderColor:  Colors.white,
-        gradientBackground: new LinearGradient(
+        gradientBackground: new LinearGradient(// Page Color From Style/SplashColor File
             colors: [
-              Theme.Colors.loginGradientStart,
-              Theme.Colors.loginGradientEnd
+              Theme.Colors.loginGradientStart,// Start of Gradient
+              Theme.Colors.loginGradientEnd// End Of Gradient
             ],
-            begin: const FractionalOffset(0.0, 0.0),
-            end: const FractionalOffset(1.0, 1.0),
+            begin: const FractionalOffset(0.0, 0.0),// Color Start Offset per pix
+            end: const FractionalOffset(1.0, 1.0),// Color End Offset per pix
             stops: [0.0, 1.0],
-            tileMode: TileMode.clamp),
+            tileMode: TileMode.clamp// Gradient Mode Style
+        ),
       ),
     );
   }
