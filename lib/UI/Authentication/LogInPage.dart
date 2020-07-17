@@ -174,49 +174,56 @@ class _LogInPageState extends State<LogInPage> {
       ),
     );
   }
-  void showInSnackBar(String value) {
-    FocusScope.of(context).requestFocus(new FocusNode());
-    _scaffoldKey.currentState?.removeCurrentSnackBar();
-    _scaffoldKey.currentState.showSnackBar(new SnackBar(
-      content: new Text(
-        value,
-        textAlign: TextAlign.center,
+  void showInSnackBar(String value) { // Void Function to show SnackBar
+    FocusScope.of(context).requestFocus(new FocusNode());// Request Keyboard to hide
+    _scaffoldKey.currentState?.removeCurrentSnackBar();// check if there is another snackbar before call new one
+    _scaffoldKey.currentState.showSnackBar(new SnackBar( // SnackBar Entry point
+      content: new Text(// text that contain Message
+        value,// Message Value
+        textAlign: TextAlign.center, //Text Positioned
         style: TextStyle(
             color: Color(0xFF40084d),
             fontSize: 16.0,
             fontFamily: "WorkSansSemiBold"),
       ),
-      backgroundColor: Colors.white,
-      duration: Duration(seconds: 1),
+      backgroundColor: Colors.white,// SnackBar Background Color
+      duration: Duration(seconds: 1),// Duration of snackbar, How many seconds must the snackbar be at the top of the scaffold
     ));
   }
 
   Future signIn()async{
-    showInSnackBar("Please Wait...");
-    try {
+    showInSnackBar("Please Wait...");// Snack message
+    try {// try catch start
       userId = (await _auth.signInWithEmailAndPassword(email: emailController.text,
-          password: passwordController.text)).user.uid;
-      if (userId.length > 0 && userId != null) {
-        if(userId==null){
-          showInSnackBar("Invalid email or password");
+          password: passwordController.text)).user.uid; // calling _auth method from FirebaseAuth Lib and passing Email and Password to signIn this User and return the UserID
+      if (userId.length > 0 && userId != null) { // Checking if the returned UserId is null
+        if(userId==null){// Checking if the returned UserId is null again
+          showInSnackBar("Invalid email or password");// passing SnackMessage
         }else{
-          print('UserID= '+userId);
-          saveUserData().whenComplete(() {
-            Navigator.of(context).pushReplacement(new CupertinoPageRoute(builder: (BuildContext context) => new DashBoard(userID: userId,)));
+          print('UserID= '+userId);// Print UserID text and it's value(UserID)
+          saveUserData().whenComplete(() {// Calling SaveUserData function to save user data to DB and after this function complete 100% Navigate to the DashBoard Page and passing UserId with it
+            Navigator.of(context).pushReplacement(// Navigating with replacement to prevent Backward
+                new CupertinoPageRoute(builder: (BuildContext context) => new DashBoard(
+                  userID: userId,// UserID Value
+                )));
           });
         }
       }
-    } catch (e) {
-      showInSnackBar("Invalid email or password");
+    } catch (e) {// Catch on exception
+      print(e.toString());// print Exception value
+      showInSnackBar("Invalid email or password");// SnackBar Message in case of exception
     }
   }
-  Future saveUserData()async{
-    await Firestore.instance.collection('UsersAccounts').document(userId).updateData({
-      'UserLastLogin':logInDate,
-    });
+  Future saveUserData()async{// Save User Data Function with asynchronous ability
+    await Firestore.instance // FireStore Instance
+        .collection('UsersAccounts')// FireStore Collection name (Table Name)
+        .document(userId)// Document ID = UserID
+        .updateData({// Commanding Firebase to Update UserID record with the following
+      'UserLastLogin':logInDate,// FieldName:FieldValue
+    });// end of firestore query
     setState(() {
-      password='';
+      password='';//setting password field to empty in case of any leak
     });
   }
 
-}
+}// end of LoginPage
