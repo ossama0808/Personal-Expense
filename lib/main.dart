@@ -1,8 +1,9 @@
-import 'package:PersonalExpense/UI/LogInPage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 import 'Style/SplashColor.dart'as Theme;
+import 'UI/Authentication/LogInPage.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,0 +1,10 @@
+/build
+/android
+*.xml
+/.dart_tool/flutter_build
+*.d
+.dart_tool/flutter_build/11dc91b1857c2fa1a468ea4fafd1c415/.filecache
+*.bin
+*.lock
+*.properties
+*.ipa
