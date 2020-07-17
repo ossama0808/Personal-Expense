@@ -1,3 +1,6 @@
+import 'package:PersonalExpense/UI/Authentication/SignUp.dart';
+import 'package:PersonalExpense/UI/DashBoard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +19,11 @@ enum FormMode { LOGIN, SIGNUP }
 class _LogInPageState extends State<LogInPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();// Global Key to Control Screen from any stated object
   // variables Section
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   DateTime logInDate = DateTime.now();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  String userId;
   String email;
   String password;
   bool showChangePassEmailSend=false;
@@ -75,7 +80,7 @@ class _LogInPageState extends State<LogInPage> {
                 height: 1,
               ),
               decoration: InputDecoration(
-                hintText: 'Email',
+                //hintText: 'Email',
                 contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(32.0),
@@ -107,6 +112,7 @@ class _LogInPageState extends State<LogInPage> {
           ),
           SizedBox(height: 10.0),// Add Extra Size
           TextFormField(// Password Field
+            controller: passwordController,// Variable that hold typed value
             style: TextStyle(
               color: Colors.white,
               fontSize: 16,
@@ -115,7 +121,7 @@ class _LogInPageState extends State<LogInPage> {
             //textAlign: vTextAlignment,
             obscureText: true,
             decoration: InputDecoration(
-              hintText: 'Password',
+              //hintText: 'Password',
               contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               //border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0),
               enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0), borderSide: BorderSide(color: Colors.white, width: 2.0, style: BorderStyle.solid)),
@@ -142,7 +148,7 @@ class _LogInPageState extends State<LogInPage> {
             ),
             onPressed: () async {// On Pressed Function
               FocusScope.of(context).unfocus();// Hide Keyboard
-
+              signIn();
             },
             padding: EdgeInsets.all(12),
             color: Colors.white.withOpacity(0.8),
@@ -160,13 +166,57 @@ class _LogInPageState extends State<LogInPage> {
               'Don\'t Have an Account?',
               style: TextStyle(color: Colors.white70),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacement(new CupertinoPageRoute(builder: (BuildContext context) => new SignUpPage()));
+            },
           ),
         ],
       ),
     );
   }
+  void showInSnackBar(String value) {
+    FocusScope.of(context).requestFocus(new FocusNode());
+    _scaffoldKey.currentState?.removeCurrentSnackBar();
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(
+      content: new Text(
+        value,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            color: Color(0xFF40084d),
+            fontSize: 16.0,
+            fontFamily: "WorkSansSemiBold"),
+      ),
+      backgroundColor: Colors.white,
+      duration: Duration(seconds: 1),
+    ));
+  }
 
-
+  Future signIn()async{
+    showInSnackBar("Please Wait...");
+    try {
+      userId = (await _auth.signInWithEmailAndPassword(email: emailController.text,
+          password: passwordController.text)).user.uid;
+      if (userId.length > 0 && userId != null) {
+        if(userId==null){
+          showInSnackBar("Invalid email or password");
+        }else{
+          print('UserID= '+userId);
+          saveUserData().whenComplete(() {
+            Navigator.of(context).pushReplacement(new CupertinoPageRoute(builder: (BuildContext context) => new DashBoard(userID: userId,)));
+          });
+        }
+      }
+    } catch (e) {
+      showInSnackBar("Invalid email or password");
+    }
+  }
+  Future saveUserData()async{
+    await Firestore.instance.collection('UsersAccounts').document(userId).updateData({
+      'UserLastLogin':logInDate,
+    });
+    setState(() {
+      password='';
+    });
+  }
 
 }
