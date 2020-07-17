@@ -315,9 +315,7 @@ class _SignUpPageState extends State<SignUpPage> {
         print(password);
         print(confirmPassword);
         if(password.length>6 && password!='123456'){
-          signUp().whenComplete(() {
-
-          });
+          signUp();// Calling SignUp function.
         }else{
           showInSnackBar("Password does'nt match the criteria");
         }
@@ -338,7 +336,7 @@ class _SignUpPageState extends State<SignUpPage> {
         }else{
           print('UserID= '+userId);
           print('Saving New User To DB...... ');
-          saveUserData().whenComplete(() {
+          saveUserData().whenComplete(() {// Calling SaveUserData function and wait till finish to execute the navigator Command
             Navigator.of(context).pushReplacement(new CupertinoPageRoute(builder: (BuildContext context) => new DashBoard(userID: userId,)));
           });
         }
@@ -350,7 +348,10 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Future saveUserData()async{
-    await Firestore.instance.collection('UsersAccounts').document(userId).setData({
+    await Firestore.instance
+        .collection('UsersAccounts')
+        .document(userId)
+        .setData({// Setting Data to create new record with the following records NOT UPDATEDATA.
       'UserID':userId,
       'UserName':userName,
       'UserLastName':userLastName,
@@ -364,4 +365,4 @@ class _SignUpPageState extends State<SignUpPage> {
     });
   }
 
-}
+}// end of signUp Page.

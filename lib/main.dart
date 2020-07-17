@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'Style/SplashColor.dart'as Theme;
+import 'Style/SplashColor.dart'as Theme;// importing this library with a costume name
 import 'UI/Authentication/LogInPage.dart';
 
 void main() {
