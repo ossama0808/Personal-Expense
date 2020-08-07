@@ -363,6 +363,12 @@ class _SignUpPageState extends State<SignUpPage> {
       password='';
       confirmPassword='';
     });
+    await Firestore.instance.collection('Statistics').document(userId).setData({
+      'TotalBalance':int.parse('0'),
+      'TotalExpenses':int.parse('0'),
+      'TotalIncome':int.parse('0'),
+      'UserID':userId
+    });
   }
 
 }// end of signUp Page.
