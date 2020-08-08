@@ -152,9 +152,12 @@ bool showStatementFlowList=false;
             child: headerStatus(),
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: statementFlowList(),
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: statementFlowList(),
+            ),
           )
         ],
       ),

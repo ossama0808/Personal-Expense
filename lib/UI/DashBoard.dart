@@ -95,55 +95,60 @@ class _DashBoardState extends State<DashBoard> {
          });
    });
 
-   //////////////////////////// Now we have two lists that holds Expenses and Incomes Transaction Amount./////////////////////
-   if(transactionsList.documents.length<5){ // checking if both Transactions type (expenses and income) is less than 5 transactions?
-     setState(() {
-       showGraph=false; // if true then don't show graph
-       // because if we show graph with less than 5 transaction mathematically we can't calculate Y axis
-     });
-   }else{// if true
+  if(transactionsList==null){
+    // Do Nothing
+  }else{
+    //////////////////////////// Now we have two lists that holds Expenses and Incomes Transaction Amount./////////////////////
+    if(transactionsList.documents.length<5){ // checking if both Transactions type (expenses and income) is less than 5 transactions?
+      setState(() {
+        showGraph=false; // if true then don't show graph
+        // because if we show graph with less than 5 transaction mathematically we can't calculate Y axis
+      });
+    }
+    else{// if true
 
-     if(income.length>=1 && income.length>=1){// checking if income list is greater than 1 transaction ( graph can't be shown if income is less than 1 transaction )
-       double totalVal; // temp variable of type double that holds total of formula
-       // if true
-       setState(() { // setting values..
+      if(income.length>=1 && income.length>=1){// checking if income list is greater than 1 transaction ( graph can't be shown if income is less than 1 transaction )
+        double totalVal; // temp variable of type double that holds total of formula
+        // if true
+        setState(() { // setting values..
 
-         if(income.length>expenses.length){ // here we see, if income is bigger tan expenses?
-           // if true
-           higherLength=income; // fill higherLength list with income list
-           lowerLength=expenses; // fill lowerLength list with expenses list
-         }else if(expenses.length>income.length){// if false
-           higherLength=expenses; // fill higherLength list with expenses list
-           lowerLength=income; // fill lowerLength list with income list
-         }
+          if(income.length>expenses.length){ // here we see, if income is bigger tan expenses?
+            // if true
+            higherLength=income; // fill higherLength list with income list
+            lowerLength=expenses; // fill lowerLength list with expenses list
+          }else if(expenses.length>income.length){// if false
+            higherLength=expenses; // fill higherLength list with expenses list
+            lowerLength=income; // fill lowerLength list with income list
+          }
 
-         total.clear(); // clearing total list
-         for (int i = 0; i < lowerLength.length; i++) { // for loop to calculate and fill total array
-           // formula is Y axis = ( higher length value - lower length value)
-           totalVal=higherLength[i]-lowerLength[i]; // fill totalVal variable with value
-           total.add(totalVal); // add totalVal value to total List
-           higherLength.removeAt(i); // remove value at index from higherLength
-           lowerLength.removeAt(i); // remove value at index from lowerLength
-         }
+          total.clear(); // clearing total list
+          for (int i = 0; i < lowerLength.length; i++) { // for loop to calculate and fill total array
+            // formula is Y axis = ( higher length value - lower length value)
+            totalVal=higherLength[i]-lowerLength[i]; // fill totalVal variable with value
+            total.add(totalVal); // add totalVal value to total List
+            higherLength.removeAt(i); // remove value at index from higherLength
+            lowerLength.removeAt(i); // remove value at index from lowerLength
+          }
 
-         for (int i = 0; i < higherLength.length; i++) { // adding the remaining values from higherLength list to total list
-           total.add(higherLength[i]);
-         }
+          for (int i = 0; i < higherLength.length; i++) { // adding the remaining values from higherLength list to total list
+            total.add(higherLength[i]);
+          }
 
-         statisticsGraphicList.clear(); // clearing MAIN Graph list
-         for(int i=0;i<total.length;i++){ // filling MAIN Graph List with total list
-           statisticsGraphicList.add(total[i]);
-         }
+          statisticsGraphicList.clear(); // clearing MAIN Graph list
+          for(int i=0;i<total.length;i++){ // filling MAIN Graph List with total list
+            statisticsGraphicList.add(total[i]);
+          }
 
-         showGraph=true; // lastly show graph
-       });
+          showGraph=true; // lastly show graph
+        });
 
-     }else{ // if false
-       setState(() {
-         showGraph=false; // hide Graph
-       });
-     }
-   }
+      }else{ // if false
+        setState(() {
+          showGraph=false; // hide Graph
+        });
+      }
+    }
+  }
 
   } // end of calculating and showing graph
 
@@ -179,7 +184,7 @@ class _DashBoardState extends State<DashBoard> {
       key:_scaffoldKey,// Stated Key
         appBar: PreferredSize(
           child: Container(
-            color: Colors.transparent,
+            color: Colors.white,
             height: 50,
           ),
           preferredSize: MediaQuery.of(context).size,

@@ -292,12 +292,15 @@ class _TransactionCUDState extends State<TransactionCUD> {
                   print(initialCategoryValue);
                 },
                 hint: Text(
-                  initialCategoryLable,textAlign: TextAlign.justify,
+                  initialCategoryLable,
+                  textAlign: TextAlign.justify,
                   style: TextStyle(
                     color: Color(0xFF40084d), //Colors.amber,
                   ),
                 ),
                 items: <String>[
+                  'Salary',
+                  'Bounce',
                   'Groceries',
                   'Personal care',
                   'Entertainment',
@@ -305,7 +308,7 @@ class _TransactionCUDState extends State<TransactionCUD> {
                   'Fuel',
                   'Electronics',
                   'Subscriptions',
-                  'Utility bills',
+                  'Utility Bills',
                   'Other',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
@@ -503,6 +506,8 @@ class _TransactionCUDState extends State<TransactionCUD> {
                   ),
                 ),
                 items: <String>[
+                  'Salary',
+                  'Bounce',
                   'Groceries',
                   'Personal care',
                   'Entertainment',
@@ -510,7 +515,7 @@ class _TransactionCUDState extends State<TransactionCUD> {
                   'Fuel',
                   'Electronics',
                   'Subscriptions',
-                  'Utility bills',
+                  'Utility Bills',
                   'Other',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
