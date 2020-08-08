@@ -184,7 +184,7 @@ class _DashBoardState extends State<DashBoard> {
       key:_scaffoldKey,// Stated Key
         appBar: PreferredSize(
           child: Container(
-            color: Colors.transparent,
+            color: Colors.white,
             height: 50,
           ),
           preferredSize: MediaQuery.of(context).size,
